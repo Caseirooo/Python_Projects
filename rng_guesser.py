@@ -24,3 +24,6 @@ while (n != answer):
         print("The number is smaller than your answer.")
 
 print(f"You got it in {guess} guesses.")
+
+nig = 1
+
