@@ -1,32 +1,60 @@
 import random
+MAX_LINES = 3
+MAX_BET = 100
+MIN_BET = 1
 
 
 def deposit():
     while True:
-        amount = input("How much do you want to deposit?\n$")
+        amount = input("How much do you want to deposit? $")
         if amount.isdigit():
             amount = int(amount)
             if amount > 0:
-                balance += amount
-                with open("balance.txt", "w") as f:
-                    f.write(str(balance))
                 break
             else:
                 print("Amount has to be greater than 0.")
         else:
             print("Amount has to be a number.")
 
+    return amount
 
-with open("balance.txt", "r") as f:
-    balance = int(f.read())
-while True:
-    choice = int(input(
-        "\nWhat do you want to do?\n1. Deposit\n2. Check Balance\n3. GOLD GOLD GOLD\n4. Quit\n"))
-    if choice == 1:
-        deposit()
-    elif choice == 2:
-        print(balance)
-    elif choice == 3:
-        break
-    elif choice == 4:
-        break
+
+def get_number_of_lines():
+    while True:
+        lines = input(
+            "Enter the number of lines to bet on (1-" + str(MAX_LINES) + ")? ")
+        if lines.isdigit():
+            lines = int(lines)
+            if 1 <= lines <= MAX_LINES:
+                break
+            else:
+                print("Enter a valid number of lines.")
+        else:
+            print("Enter a number.")
+
+    return lines
+
+
+def get_bet():
+    while True:
+        amount = input("How much do you want to bet on each line? $")
+        if amount.isdigit():
+            amount = int(amount)
+            if MIN_BET <= amount <= MAX_BET:
+                break
+            else:
+                print(f"Amount must be between ${MIN_BET} and ${MAX_BET}.")
+        else:
+            print("Amount has to be a number.")
+    return amount
+
+
+def main():
+    balance = deposit()
+    lines = get_number_of_lines()
+    bet = get_bet()
+    total_bet = lines * bet
+    print(f"You are betting ${bet} on {lines}. Total bet is ${total_bet}.")
+
+
+main()
