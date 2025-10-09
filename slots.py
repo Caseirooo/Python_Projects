@@ -54,6 +54,10 @@ def main():
     lines = get_number_of_lines()
     bet = get_bet()
     total_bet = lines * bet
+    while (total_bet > balance):
+        print(
+            "Your balance is smaller than your bet. Your balance is {balance}.")
+        get_bet()
     print(f"You are betting ${bet} on {lines}. Total bet is ${total_bet}.")
 
 
